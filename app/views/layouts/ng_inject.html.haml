@@ -1,0 +1,8 @@
+%head
+  %script{:src => "/assets/zone.js/dist/zone.js"}
+  %script{:src => "/assets/reflect-metadata/Reflect.js"}
+= yield
+= javascript_include_tag "inline.bundle.js"
+= javascript_include_tag "vendor.bundle.js"
+= javascript_include_tag "main.bundle.js"
+= javascript_include_tag "styles.bundle.js"
