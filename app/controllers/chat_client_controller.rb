@@ -5,9 +5,4 @@ class ChatClientController < ApplicationController
     render 'chat_client/index.html.haml'
   end
 
-  def messages
-    messages = Message.all
-    render json: messages
-  end
-
 end
