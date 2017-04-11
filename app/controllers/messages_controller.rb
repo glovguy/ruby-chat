@@ -8,12 +8,9 @@ class MessagesController < ApplicationController
 
   def create
     new_message = Messages.new(message_attributes)
-
-    if new_message.save
-      ActionCable.server.broadcast('chat', new_message.as_json)
-    else
-      render json: { 'error' => 'invalid request' }
-    end
+    render json: { 'error' => 'invalid request' } unless new_message.save
+    ActionCable.server.broadcast('chat', new_message.as_json.merge(action: 'newMessage'))
+    render json: { 'success' => 'message sent' }
   end
 
   def message_params
