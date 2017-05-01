@@ -1,7 +1,7 @@
 class ChatClientController < ApplicationController
   layout 'ng_inject'
 
-  def client
+  def show
     render 'chat_client/index.html.haml'
   end
 
