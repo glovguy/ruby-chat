@@ -1,0 +1,16 @@
+<h1>
+    {{title}}
+</h1>
+<div class="container col-md-2">
+    <ul>
+        <li>Yes/No Bot</li>
+        <li>Regex Bot</li>
+    </ul>
+</div>
+<div class="container col-md-4">
+    <app-collaboration #collabMod></app-collaboration>
+</div>
+<div class="container col-md-6">
+    <app-client [collabMod]="collabMod"></app-client>
+    <app-message-river></app-message-river>
+</div>
