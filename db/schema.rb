@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410011008) do
+ActiveRecord::Schema.define(version: 20170508005115) do
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_bots", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.integer  "users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["users_id"], name: "index_chat_bots_on_users_id"
+    t.index [nil], name: "index_chat_bots_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -25,6 +35,13 @@ ActiveRecord::Schema.define(version: 20170410011008) do
     t.datetime "updated_at", null: false
     t.string   "messages"
     t.string   "style"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username",   limit: 30
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end
