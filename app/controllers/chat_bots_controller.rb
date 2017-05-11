@@ -57,6 +57,6 @@ class ChatBotsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chat_bot_params
-      params.require(:chat_bot).permit(:name, :location)
+      params.require(:chat_bot).permit(:name, :location, :user_id)
     end
 end
