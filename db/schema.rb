@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170511024112) do
+ActiveRecord::Schema.define(version: 20170604195635) do
 
   create_table "chat_bots", force: :cascade do |t|
     t.string   "name"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20170511024112) do
     t.integer  "sender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "messages"
     t.string   "style"
   end
 
