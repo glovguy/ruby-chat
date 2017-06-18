@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  has_many :chat_bots
+  belongs_to :chat_rooms, optional: true
 end
