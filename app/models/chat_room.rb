@@ -12,8 +12,8 @@ class ChatRoom < ApplicationRecord
   private
 
   def notify_observers(new_message)
-    notify_bot new_message
     broadcast_message new_message
+    notify_bot new_message
   end
 
   def notify_bot(message)
@@ -23,6 +23,15 @@ class ChatRoom < ApplicationRecord
     puts "Posting: #{message_json}"
     response = Net::HTTP.post_form(url, message_json)
     puts response.body
+    if !response.body['reply'].nil? && @repeat_prevention == false
+      puts response.body['reply']
+      attributes = { 'sender' => 3, 'style' => 'bot' }
+      attributes = attributes.merge({ 'body' => response.body['reply'] })
+      @repeat_prevention = true
+      new_message(attributes)
+    else
+      @repeat_prevention = false
+    end
   end
 
   def broadcast_message(message)
