@@ -9,7 +9,7 @@ export class MessageService {
   constructor(private http: Http) { }
 
   getMessages(successCallback, failureCallback): void {
-      this.http.get(`/chat/messages`)
+      this.http.get(`/api/messages`)
       .map(resp => resp.json())
       .subscribe(
           (data) => successCallback(data),
@@ -25,7 +25,7 @@ export class MessageService {
         }
       }
     }
-    this.http.post(`/chat/messages`, {
+    this.http.post(`/api/messages`, {
       data: {
         attributes: {
           body: value

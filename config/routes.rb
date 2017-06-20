@@ -5,8 +5,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :messages, only: [:index, :create]
   end
-  get '/chat/messages', to: redirect('/api/messages')
-  post '/chat/messages', to: redirect('/api/messages')
 
   mount ActionCable.server => '/cable'
 end
