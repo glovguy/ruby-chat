@@ -19,12 +19,8 @@ class ChatRoom < ApplicationRecord
   def notify_bot(message)
     url = URI.parse(location.to_s)
     message_json = message.as_json
-    puts "Post to: #{url}"
-    puts "Posting: #{message_json}"
     response = Net::HTTP.post_form(url, message_json)
-    puts response.body
     if !response.body['reply'].nil? && @repeat_prevention == false
-      puts response.body['reply']
       attributes = { 'sender' => 3, 'style' => 'bot' }
       attributes = attributes.merge({ 'body' => response.body['reply'] })
       @repeat_prevention = true

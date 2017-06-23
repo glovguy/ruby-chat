@@ -16,7 +16,6 @@ class ChatRoomsController < ApplicationController
   end
 
   def create
-    puts chat_room_params
     @chat_room = ChatRoom.new(chat_room_params)
 
     respond_to do |format|
