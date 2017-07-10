@@ -20,14 +20,6 @@ class ChatRoom < ApplicationRecord
     url = URI.parse(location.to_s)
     message_json = message.as_json
     response = Net::HTTP.post_form(url, message_json)
-    if !response.body['reply'].nil? && @repeat_prevention == false
-      attributes = { 'sender' => 3, 'style' => 'bot' }
-      attributes = attributes.merge({ 'body' => response.body['reply'] })
-      @repeat_prevention = true
-      new_message(attributes)
-    else
-      @repeat_prevention = false
-    end
   end
 
   def broadcast_message(message)
