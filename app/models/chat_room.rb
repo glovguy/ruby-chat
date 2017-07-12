@@ -19,7 +19,12 @@ class ChatRoom < ApplicationRecord
   def notify_bot(message)
     url = URI.parse(location.to_s)
     message_json = message.as_json
-    response = Net::HTTP.post_form(url, message_json)
+    begin
+      response = Net::HTTP.post_form(url, message_json)
+    rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED,
+        Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+      puts "Error notifying bot at #{location}"
+    end
   end
 
   def broadcast_message(message)
