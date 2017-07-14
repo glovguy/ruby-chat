@@ -18,7 +18,12 @@ class ChatRoom < ApplicationRecord
 
   def notify_bot(message)
     url = URI.parse(location.to_s)
-    message_json = message.as_json
+    reply_url = ENV['RUBY_CHAT_BASE_URL']
+    message_json = message.as_json.merge(reply_url: reply_url)
+    http_message(url, message_json)
+  end
+
+  def http_message(url, message_json)
     begin
       response = Net::HTTP.post_form(url, message_json)
     rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED,
