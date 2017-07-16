@@ -1,0 +1,1 @@
+web: ng build && bundle exec rails server -p $PORT
