@@ -10,6 +10,6 @@
   },
   "dependencies": {
     "@angular/compiler-cli": "^2.3.1",
-    "ng-chat": "gh+https:git@github.com/glovguy/ng-chat.git"
+    "ng-chat": "glovguy/ng-chat"
   }
 }
