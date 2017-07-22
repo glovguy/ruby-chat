@@ -4,6 +4,9 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "postinstall": "cd ng-chat && npm install",
+    "postinstall": "cd ng-chat && npm install"
+  },
+  "dependencies": {
+    "@angular/compiler-cli": "^2.3.1"
   }
 }
