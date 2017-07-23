@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "engines": {
-    "node": "6.10.2"
+    "node": "6.10.2",
+    "npm": "5.3.0"
   },
   "scripts": {
     "postinstall": "cd ng-chat && npm install && ng build"
