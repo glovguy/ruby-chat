@@ -1,3 +1,3 @@
 [submodule "ng-chat"]
 	path = ng-chat
-	url = git@github.com:glovguy/ng-chat.git
+	url = git://github.com/glovguy/ng-chat
