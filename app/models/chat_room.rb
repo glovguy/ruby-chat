@@ -20,6 +20,7 @@ class ChatRoom < ApplicationRecord
     url = URI.parse(location.to_s)
     reply_url = ENV['RUBY_CHAT_BASE_URL']
     message_json = message.as_json.merge(reply_url: reply_url)
+    Rails.logger.info "Sending message to #{url}\n\tMessage being sent: #{message_json}"
     http_message(url, message_json)
   end
 
