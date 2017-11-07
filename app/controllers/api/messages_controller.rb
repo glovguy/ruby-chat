@@ -3,7 +3,7 @@ module Api
     skip_before_action :verify_authenticity_token
 
     def index
-      messages = Messages.all
+      messages = Messages.where(updated_at: Time.now-2.week..Time.now)
       render json: messages, each_serializer: MessagesSerializer
     end
 
