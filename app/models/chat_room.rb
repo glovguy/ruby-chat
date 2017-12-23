@@ -9,6 +9,11 @@ class ChatRoom < ApplicationRecord
     notify_observers(new_message)
   end
 
+  def wake_up
+    message = { style: 'user', reply_url: '', body: '', ignore: true }
+    http_message(location, message)
+  end
+
   private
 
   def notify_observers(new_message)
