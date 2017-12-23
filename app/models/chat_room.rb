@@ -9,6 +9,10 @@ class ChatRoom < ApplicationRecord
     notify_observers(new_message)
   end
 
+  def wake_up
+    notify_bot Messages.new
+  end
+
   private
 
   def notify_observers(new_message)
