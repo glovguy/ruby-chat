@@ -45,7 +45,7 @@ GEM
       tzinfo (~> 1.1)
     arel (7.1.4)
     builder (3.2.3)
-    byebug (9.0.6)
+    byebug (9.1.0)
     case_transform (0.2)
       activesupport
     coffee-rails (4.2.1)
