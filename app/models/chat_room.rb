@@ -1,4 +1,4 @@
-require 'net/http'
+require 'rest-client'
 
 class ChatRoom < ApplicationRecord
   has_one :user
@@ -17,7 +17,7 @@ class ChatRoom < ApplicationRecord
   end
 
   def notify_bot(message)
-    url = URI.parse(location.to_s)
+    url = location.to_s
     reply_url = ENV['RUBY_CHAT_BASE_URL']
     message_json = message.as_json.merge(reply_url: reply_url)
     Rails.logger.info "Sending message to #{url}\n\tMessage being sent: #{message_json}"
@@ -26,10 +26,10 @@ class ChatRoom < ApplicationRecord
 
   def http_message(url, message_json)
     begin
-      response = Net::HTTP.post_form(url, message_json)
-    rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError, Errno::ECONNREFUSED,
-        Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+      RestClient.post url, message_json
+    rescue RestClient::ExceptionWithResponse => e
       puts "Error notifying bot at #{location}"
+      puts e.response
     end
   end
 
