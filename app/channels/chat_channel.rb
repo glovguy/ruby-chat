@@ -1,7 +1,7 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    ChatRoom.find(params[:bot_id]).wake_up
-    stream_from 'chat'
+    ChatRoom.first.wake_up
+    stream_from "chat_#{params[:chat_stream_id]}"
   end
 
   def unsubscribed

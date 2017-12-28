@@ -10,29 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170618032650) do
+ActiveRecord::Schema.define(version: 20171228191740) do
 
   create_table "chat_rooms", force: :cascade do |t|
-    t.string   "name"
-    t.string   "location"
+    t.string "name"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "users_id"
+    t.integer "user_id"
+    t.integer "users_id"
+    t.index ["user_id"], name: "index_chat_rooms_on_user_id"
     t.index ["users_id"], name: "index_chat_rooms_on_users_id"
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text     "body"
-    t.integer  "sender"
+    t.text "body"
+    t.integer "sender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "style"
+    t.string "style"
+    t.integer "chat_room_id"
+    t.string "chat_stream_id"
+    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",   limit: 30
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string "username", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "chat_rooms_id"
+    t.index ["chat_rooms_id"], name: "index_users_on_chat_rooms_id"
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

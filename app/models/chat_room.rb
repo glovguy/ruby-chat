@@ -10,7 +10,7 @@ class ChatRoom < ApplicationRecord
   end
 
   def wake_up
-    message = { style: 'user', reply_url: '', body: '', ignore: true }
+    message = { style: 'user', reply_url: '', body: '', ignore: true, chat_stream_id: '0' }
     http_message(location, message)
   end
 
@@ -39,6 +39,8 @@ class ChatRoom < ApplicationRecord
   end
 
   def broadcast_message(message)
-    ActionCable.server.broadcast('chat', message.as_json.merge(action: 'newMessage'))
+    chat_stream_id = message.chat_stream_id
+    puts "broadcasting to chat_#{chat_stream_id}"
+    ActionCable.server.broadcast("chat_#{chat_stream_id}", message.as_json.merge(action: 'newMessage'))
   end
 end
