@@ -5,8 +5,8 @@ class ChatRoom < ApplicationRecord
 
   def new_message(message_attributes)
     sender = User.find(message_attributes['sender'])
-    new_message = Messages.create(message_attributes)
-    notify_observers(new_message)
+    message = Messages.create(message_attributes)
+    notify_observers(message)
   end
 
   def wake_up
@@ -16,9 +16,9 @@ class ChatRoom < ApplicationRecord
 
   private
 
-  def notify_observers(new_message)
-    broadcast_message new_message
-    notify_bot new_message
+  def notify_observers(message)
+    broadcast_message message
+    notify_bot message
   end
 
   def notify_bot(message)
