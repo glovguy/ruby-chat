@@ -4,14 +4,17 @@ class ChatRoom < ApplicationRecord
   has_one :user
 
   def new_message(message_attributes)
-    sender = User.find(message_attributes['sender'])
-    message = Messages.create(message_attributes)
+    message = Messages.create!(message_attributes)
     notify_observers(message)
   end
 
   def wake_up
-    message = { style: 'user', reply_url: '', body: '', ignore: true, chat_stream_id: '0' }
-    http_message(location, message)
+    message = { reply_url: '', chat_stream_id: '', style: '' }
+    @awake = true if http_message("#{location}/wake", message)
+  end
+
+  def awake
+    @awake == true
   end
 
   private
@@ -32,9 +35,15 @@ class ChatRoom < ApplicationRecord
   def http_message(url, message_json)
     begin
       RestClient.post url, message_json
-    rescue RestClient::ExceptionWithResponse => e
+      return true
+    rescue RestClient::ExceptionWithResponse => restError
       puts "Error notifying bot at #{location}"
-      puts e.response
+      p restError
+      return false
+    rescue Errno::ECONNREFUSED => connError
+      puts "Error connecting to bot at #{location}"
+      p connError
+      return false
     end
   end
 
