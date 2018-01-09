@@ -15,10 +15,6 @@ module Api
 
     private
 
-    def chat_stream_id
-      session[:chat_stream_id] ||= SecureRandom.uuid
-    end
-
     def message_params
       params.require(:data).permit(
         attributes: [:body, :style, :sender, :chat_stream_id]

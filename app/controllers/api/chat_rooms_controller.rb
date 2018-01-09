@@ -4,8 +4,8 @@ module Api
     before_action :set_chat_room, only: [:show]
 
     def show
-      @chat_room.wake_up
-      render json: @chat_room, serializer: ChatRoomsSerializer
+      roomStatus = ChatRoomStatus.new(@chat_room, chat_stream_id)
+      render json: roomStatus, serializer: ChatRoomStatusSerializer
     end
 
     private

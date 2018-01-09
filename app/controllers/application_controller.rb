@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def has_admin_password?
     params[:password] == 'monknee'
   end
+
+  def chat_stream_id
+    session[:chat_stream_id] ||= SecureRandom.uuid
+  end
 end

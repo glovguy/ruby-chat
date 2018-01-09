@@ -10,11 +10,7 @@ class ChatRoom < ApplicationRecord
 
   def wake_up
     message = { reply_url: '', chat_stream_id: '', style: '' }
-    @awake = true if http_message("#{location}/wake", message)
-  end
-
-  def awake
-    @awake == true
+    http_message("#{location}/wake", message)
   end
 
   private
