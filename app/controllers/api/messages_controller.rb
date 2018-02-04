@@ -1,10 +1,10 @@
 module Api
   class MessagesController < ApplicationController
+    before_action :set_messages, only: [:index]
     skip_before_action :verify_authenticity_token
 
     def index
-      messages = Messages.where(updated_at: Time.now-2.week..Time.now, chat_stream_id: chat_stream_id)
-      render json: messages, each_serializer: MessagesSerializer
+      render json: @messages, each_serializer: MessagesSerializer
     end
 
     def create
@@ -14,6 +14,14 @@ module Api
     end
 
     private
+
+    def set_messages
+      if has_admin_password?
+        @messages = Messages.all
+      else
+        @messages = Messages.where(updated_at: Time.now-2.week..Time.now, chat_stream_id: chat_stream_id)
+      end
+    end
 
     def message_params
       params.require(:data).permit(
