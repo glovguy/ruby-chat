@@ -8,7 +8,7 @@
     "yarn": "1.3.2"
   },
   "scripts": {
-    "postinstall": "cd ng-chat && yarn install && yarn run build",
+    "postinstall": "set -e && cd ng-chat && yarn install && yarn run build",
     "build": "echo 'something went wrong' && cd ng-chat && ng build --target=production"
   },
   "dependencies": {
