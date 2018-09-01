@@ -65,7 +65,7 @@ GEM
     execjs (2.7.0)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
-    ffi (1.9.18)
+    ffi (1.9.25)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     haml (5.0.4)
