@@ -46,7 +46,7 @@ GEM
     arel (8.0.0)
     bindex (0.5.0)
     builder (3.2.3)
-    byebug (9.1.0)
+    byebug (11.0.1)
     case_transform (0.2)
       activesupport
     coffee-rails (4.2.2)
